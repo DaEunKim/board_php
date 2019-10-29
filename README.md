@@ -1,8 +1,8 @@
 # board_php
 
 - 작업환경
-Codeigniter 환경
-Bootstrap
+ - Codeigniter 환경
+ - Bootstrap
 
 - 구현 기능
 로그인
@@ -20,7 +20,7 @@ Pagination
 Ajax 처리
 
 - 추후 계획
-* 조회수 View Count 방식
+조회수 View Count 방식
  : Count per user | Just view count
 회원가입 
 대댓글
