@@ -1,10 +1,8 @@
 # board_php
 
 작업환경
-	- Codeigniter 환경
-	- Bootstrap
-
-
+- Codeigniter 환경
+- Bootstrap
 
 구현 기능
 	- 로그인
