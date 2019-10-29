@@ -1,6 +1,6 @@
 # board_php
 
-- 작업환경
+<작업환경>
  Codeigniter 환경
  Bootstrap
 
