@@ -1,7 +1,7 @@
 # board_php
 
 작업환경
-	- Codeignater 환경
+	- Codeigniter 환경
 	- Bootstrap
 
 
