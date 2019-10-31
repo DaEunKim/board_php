@@ -111,7 +111,7 @@ class Board extends CI_Controller {
         $seg_exp = explode("/", $seg);
         return $seg_exp;
     }
-    
+
     /** 게시물 상세보기 */
     function view() {
         // 게시판 이름과 게시물 번호에 해당하는 게시물 가져오기
@@ -124,6 +124,9 @@ class Board extends CI_Controller {
         /** 댓글 */        
         $data['comment_list'] = $this->board_m->get_comment("comment", $board_id);
 
+        /** 대댓글 */
+        $data['recomment_list'] = $this->board_m->get_recomment("comment", $board_id);
+        
         // view 호출
         $this->load->view('board/view_v', $data);
     }

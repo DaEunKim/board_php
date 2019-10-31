@@ -33,7 +33,7 @@ class Ajax_board extends CI_Controller {
         if (@$this->session->userdata('logged_in') == TRUE) {
             $this->load->model('board_m');
             
-            $table = "comment";//$this->input->post('table', TRUE);
+            $table = $this->input->post('table', TRUE);
             $board_pid = $this->input->post('board_pid', TRUE);
             $comment_contents = $this->input->post('comment_contents', TRUE);
             
@@ -94,7 +94,7 @@ class Ajax_board extends CI_Controller {
         if ( @$this->session->userdata('logged_in') == TRUE) {
             $this->load->model('board_m');
             
-            $table = "comment";//$this->input->post("table", TRUE);
+            $table = "comment";
             $comment_id = $this->input->post('comment_id', TRUE);
             
             $writer_id = $this->board_m->writer_check2($table, $comment_id);
@@ -114,5 +114,71 @@ class Ajax_board extends CI_Controller {
             echo "9000"; // 로그인 에러
         }
     }
+
+
+    public function ajax_recomment_add() {
+        if (@$this->session->userdata('logged_in') == TRUE) {
+            $this->load->model('board_m');
+            
+            $table = $this->input->post('table', TRUE);
+            $board_pid = $this->input->post('board_pid', TRUE);
+            $recomment_contents = $this->input->post('recomment_contents', TRUE);
+            $comment_id = $this->input->post('comment_id', TRUE);
+
+            if ($recomment_contents != '' ){
+                $write_data = array(
+                    "table" => $table,
+                    "board_pid" => $board_pid,
+                    "contents" => $recomment_contents,
+                    "user_id" => $this->session->userdata('user_id'),
+                    "depth" => 1,
+                    "parent_id" => $comment_id
+                );
+                
+                $result = $this->board_m->insert_recomment($write_data);
+                
+                if ($result) {
+                    $sql = "SELECT * FROM ". $table ." WHERE board_pid = '". $board_pid . "' ORDER BY comment_id DESC";
+                    $query = $this->db->query($sql);
+                    
+?>
+<table cellspacing="0" cellpadding="0" class="table table-striped">
+    <tbody>
+<?php
+                    foreach ($query->result() as $lt) {
+?>
+        <tr>
+            <th scope="row">
+                <?php echo $lt->user_id;?>
+            </th>
+            <td><?php echo $lt->contents;?></td>
+            <td><?php echo $lt->reg_date;?></td>
+            <td>
+                <a href="#" class="comment_delete" vals="<?php echo $lt->comment_id; ?>">
+                    삭제
+                </a>
+            </td>
+            
+        </tr>
+<?php
+                    }
+?>
+    </tbody>
+</table>
+<?php
+                } else {
+                    // 글 실패시
+                    echo "2000";
+                }
+            } else {
+                // 글 내용이 없을 경우
+                echo "1000";
+            }
+        } else {
+            // 로그인 필요 에러
+            echo "9000";
+        }
+    }
  
+
 }

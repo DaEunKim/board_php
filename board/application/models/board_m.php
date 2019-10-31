@@ -114,10 +114,13 @@ class Board_m extends CI_Model {
     function insert_comment($arrays) {
         $insert_array = array( 
             'board_pid' => $arrays['board_pid'],
+            'depth' => 0,
+            'parent_id' => 0,
             'user_id' => $arrays['user_id'],
             'user_name' => $arrays['user_id'],
             'contents' => $arrays['contents'],
-            'reg_date' => date('Y-m-d H:i:s')
+            'reg_date' => date('Y-m-d H:i:s'),
+            'use_yn' => 'y'
         );
         
         $this->db->insert($arrays['table'], $insert_array);
@@ -138,16 +141,57 @@ class Board_m extends CI_Model {
         
         return $result;
     }
+
+    
     /**
      * 댓글 삭제
      */
     function delete_comment($table, $comment_id) {
         $delete_array = array(
-            'comment_id' => $comment_id
+            'comment_id' => $comment_id,
+            // 'use_yn' => 'n'
         );
+        // $this->db->insert('comment', $delete_array);
+        // $board_id = $this->db->insert_id();
+
+        // return $board_id;
         $result = $this->db->delete($table, $delete_array);
         echo $this->db->last_query();
         return $result;
     }
+
+    /**
+     * 대댓글 리스트 
+     */
+    function get_recomment($table , $id) {
+        $sql = "SELECT * FROM ". $table . " WHERE board_pid = '". $id . "' ORDER BY comment_id DESC";
+        $query = $this->db->query($sql);
+        
+        $result = $query->result();
+        
+        return $result;
+    }
+    /**
+     * 대댓글 쓰기
+     */
+    function insert_recomment($arrays) {
+        $insert_array = array( 
+            'board_pid' => $arrays['board_pid'],
+            'depth' => 1,
+            'parent_id' => $arrays['parent_id'],
+            'user_id' => $arrays['user_id'],
+            'user_name' => $arrays['user_id'],
+            'contents' => $arrays['contents'],
+            'reg_date' => date('Y-m-d H:i:s'),
+            'use_yn' => 'y'
+        );
+        
+        $this->db->insert($arrays['table'], $insert_array);
+        
+        $board_id = $this->db->insert_id();
+        
+        return $board_id;
+    }
+    
 
 }
