@@ -4,11 +4,11 @@
 <header><h1></h1></header>
 <table cellspacing="0" cellpadding="0" class="table table-striped">
 <thead>
-    <tr><th scope="col">제목 : <?php echo $views->title; ?></th></tr>
+    <tr><th scope="col">제목 : <?=$views->title ?></th></tr>
     <tr>
-        <th scope="col">작성자: <?php echo $views->user_id; ?></th>
-        <th scope="col">조회수: <?php echo $views->hits; ?></th>
-        <th scope="col">작성일: <?php echo $views->reg_date; ?></th>
+        <th scope="col">작성자: <?=$views->user_id ?></th>
+        <th scope="col">조회수: <?=$views->hits ?></th>
+        <th scope="col">작성일: <?=$views->reg_date ?></th>
     </tr>
 </thead>
 <tbody>
@@ -24,10 +24,10 @@
 <tfoot>
     <tr>
         <th colspan="4">
-            <a href="<?php echo $rootURL.'/lists/'.$this->uri->segment(3).'/page/'.$this->uri->segment(7); ?>" class="btn btn-primary"> 목록 </a>
-            <a href="<?php echo $rootURL.'/modify/'.$this->uri->segment(3).'/board_id/'.$this->uri->segment(4).'/page/'.$this->uri->segment(7); ?>" class="btn btn-warning"> 수정 </a>
-            <a href="<?php echo $rootURL.'/delete/'.$this->uri->segment(3).'/board_id/'.$this->uri->segment(4).'/page/'.$this->uri->segment(7); ?>" class="btn btn-danger"> 삭제 </a>
-            <a href="<?php echo $rootURL.'/write/'.$this->uri->segment(3).'/page/'.$this->uri->segment(7); ?>" class="btn btn-success"> 쓰기 </a>                    
+            <a href="<?=$rootURL.'/lists/'.$this->uri->segment(3).'/page/'.$this->uri->segment(7) ?>" class="btn btn-primary"> 목록 </a>
+            <a href="<?=$rootURL.'/modify/'.$this->uri->segment(3).'/board_id/'.$this->uri->segment(4).'/page/'.$this->uri->segment(7) ?>" class="btn btn-warning"> 수정 </a>
+            <a href="<?=$rootURL.'/delete/'.$this->uri->segment(3).'/board_id/'.$this->uri->segment(4).'/page/'.$this->uri->segment(7) ?>" class="btn btn-danger"> 삭제 </a>
+            <a href="<?=$rootURL.'/write/'.$this->uri->segment(3).'/page/'.$this->uri->segment(7) ?>" class="btn btn-success"> 쓰기 </a>                    
         </th>
     </tr>
 </tfoot>

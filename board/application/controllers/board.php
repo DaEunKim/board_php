@@ -9,11 +9,9 @@ if (!defined('BASEPATH'))
 // 세션 동작 원리 
 
 class Board extends CI_Controller {
- 
-    
     function __construct() {
         parent::__construct();
-        $this->load->database();
+        
         $this->load->model('board_m');
         $this->load->helper(array('url', 'date'));
         $this->load->helper('form');
@@ -126,7 +124,7 @@ class Board extends CI_Controller {
 
         /** 대댓글 */
         $data['recomment_list'] = $this->board_m->get_recomment("comment", $board_id);
-        
+
         // view 호출
         $this->load->view('board/view_v', $data);
     }

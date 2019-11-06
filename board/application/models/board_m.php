@@ -9,6 +9,7 @@ if (!defined('BASEPATH'))
 class Board_m extends CI_Model {
     function __construct() {
         parent::__construct();
+        $this->load->database();
     }
 
     function get_list($table = 'board', $type = '', $offset = '', $limit = '') {
@@ -134,7 +135,7 @@ class Board_m extends CI_Model {
      * 댓글 리스트 가져오기
      */
     function get_comment($table , $id) {
-        $sql = "SELECT * FROM ". $table . " WHERE board_pid = '". $id . "' ORDER BY comment_id DESC";
+        $sql = "SELECT * FROM ". $table . " WHERE board_pid = '". $id . "' ORDER BY comment_id ASC";
         $query = $this->db->query($sql);
         
         $result = $query->result();
@@ -164,7 +165,7 @@ class Board_m extends CI_Model {
      * 대댓글 리스트 
      */
     function get_recomment($table , $id) {
-        $sql = "SELECT * FROM ". $table . " WHERE board_pid = '". $id . "' ORDER BY comment_id DESC";
+        $sql = "SELECT * FROM ". $table . " WHERE board_pid = '". $id . "' ORDER BY comment_id ASC";
         $query = $this->db->query($sql);
         
         $result = $query->result();

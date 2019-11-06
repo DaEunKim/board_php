@@ -48,7 +48,7 @@ class Ajax_board extends CI_Controller {
                 $result = $this->board_m->insert_comment($write_data);
                 
                 if ($result) {
-                    $sql = "SELECT * FROM ". $table ." WHERE board_pid = '". $board_pid . "' ORDER BY comment_id DESC";
+                    $sql = "SELECT * FROM ". $table ." WHERE board_pid = '". $board_pid . "' ORDER BY comment_id ASC";
                     $query = $this->db->query($sql);
                     
 ?>
@@ -138,7 +138,7 @@ class Ajax_board extends CI_Controller {
                 $result = $this->board_m->insert_recomment($write_data);
                 
                 if ($result) {
-                    $sql = "SELECT * FROM ". $table ." WHERE board_pid = '". $board_pid . "' ORDER BY comment_id DESC";
+                    $sql = "SELECT * FROM ". $table ." WHERE board_pid = '". $board_pid . "' ORDER BY comment_id ASC";
                     $query = $this->db->query($sql);
                     
 ?>
@@ -148,17 +148,10 @@ class Ajax_board extends CI_Controller {
                     foreach ($query->result() as $lt) {
 ?>
         <tr>
-            <th scope="row">
-                <?php echo $lt->user_id;?>
-            </th>
-            <td><?php echo $lt->contents;?></td>
-            <td><?php echo $lt->reg_date;?></td>
-            <td>
-                <a href="#" class="comment_delete" vals="<?php echo $lt->comment_id; ?>">
-                    삭제
-                </a>
-            </td>
-            
+            <th scope="row"><?=$lt->user_id?></th>
+            <td><?=$lt->contents?></td>
+            <td><?=$lt->reg_date?></td>
+            <td><a href="#" class="comment_delete" vals="<?=$lt->comment_id ?>">삭제</a></td>
         </tr>
 <?php
                     }
